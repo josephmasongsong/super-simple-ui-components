@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "ES5",
+    "module": "ESNext",
+    "strict": true,
+    "watch": true,
+    "skipLibCheck": true,
+    "outDir": "lib",
+    "lib": ["ES2015", "DOM"]
+  },
+  "include": ["src"]
+}
