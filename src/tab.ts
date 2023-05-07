@@ -1,4 +1,8 @@
-export class Tab {
+/**
+ * Tab
+ * @class
+ */
+class Tab {
   private tabs: HTMLDivElement[];
   private panels: HTMLDivElement[];
   private tabContainer: HTMLDivElement | null;
@@ -11,6 +15,10 @@ export class Tab {
     this.panels = Array.from(this.panelContainer!.querySelectorAll('div'));
     this.selectedTab = null;
   }
+  /**
+   * Initiate the tabs, add aria attributes and add event listeners
+   * @returns {void}
+   */
   init() {
     // * Apply ARIA attributes to tabs
     this.tabs.forEach((tab, index) => {
@@ -64,6 +72,10 @@ export class Tab {
       });
     });
   }
+  /**
+   * Set aria attributes for current tab and reset for others for click event
+   * @param {EventTarget}
+   */
   toggleTabs(el: HTMLDivElement) {
     this.tabs.forEach(tab => {
       tab.setAttribute('aria-selected', 'false');
@@ -72,6 +84,10 @@ export class Tab {
     el.setAttribute('aria-selected', 'true');
     el.setAttribute('tabindex', '0');
   }
+  /**
+   * Show active tab panel and hide the rest
+   * @param {EventTarget} el
+   */
   togglePanels(el: HTMLDivElement) {
     this.panels.forEach(panel => {
       panel.setAttribute('aria-expanded', 'false');
@@ -85,6 +101,10 @@ export class Tab {
     panel!.setAttribute('tabindex', '0');
     panel!.style.display = 'block';
   }
+  /**
+   * Set aria attribute for a single tab and unset the previously selected tab
+   * @param {HTMLElement} tab
+   */
   updateTab(tab: HTMLDivElement) {
     this.selectedTab!.setAttribute('aria-selected', 'true');
     this.selectedTab!.setAttribute('tabindex', '-1');
@@ -94,3 +114,5 @@ export class Tab {
     this.selectedTab.focus();
   }
 }
+
+export { Tab };

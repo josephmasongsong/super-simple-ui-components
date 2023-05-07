@@ -1,4 +1,8 @@
-export class Accordion {
+/**
+ * Accordion
+ * @class
+ */
+class Accordion {
   private tabs: HTMLButtonElement[];
   private panels: HTMLDivElement[];
   private selectedTab: HTMLButtonElement | null;
@@ -7,6 +11,10 @@ export class Accordion {
     this.panels = Array.from(document.querySelectorAll('.tabpanel'));
     this.selectedTab = null;
   }
+  /**
+   * Initiate the accordion tabs, add aria attributes and add event listeners
+   * @returns {void}
+   */
   init() {
     // * Apply ARIA attributes to tabs
     this.tabs.forEach((tab, index) => {
@@ -61,6 +69,10 @@ export class Accordion {
       });
     });
   }
+  /**
+   * Set aria attributes for current tab and reset for others for click event
+   * @param {EventTarget}
+   */
   toggleTabs(el: HTMLButtonElement) {
     this.tabs.forEach(tab => {
       tab.setAttribute('aria-selected', 'false');
@@ -69,6 +81,10 @@ export class Accordion {
     el.setAttribute('aria-selected', 'true');
     el.setAttribute('tabindex', '0');
   }
+  /**
+   * Show active tab panel and hide the rest
+   * @param {EventTarget} el
+   */
   togglePanels(el: HTMLButtonElement) {
     this.panels.forEach(panel => {
       panel.setAttribute('aria-hidden', 'true');
@@ -83,6 +99,10 @@ export class Accordion {
     panel!.setAttribute('tabindex', '0');
     panel!.style.display = 'block';
   }
+  /**
+   * Set aria attribute for a single tab and unset the previously selected tab
+   * @param {HTMLElement} tab
+   */
   updateTab(tab: HTMLButtonElement) {
     this.selectedTab!.setAttribute('aria-selected', 'false');
     this.selectedTab!.setAttribute('tabindex', '-1');
@@ -92,3 +112,5 @@ export class Accordion {
     this.selectedTab.focus();
   }
 }
+
+export { Accordion };

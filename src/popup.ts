@@ -5,13 +5,21 @@ type PopupOptions = {
   opacity: string;
 };
 
-export class Popup {
+/**
+ * Popup
+ * @class
+ */
+class Popup {
   private wrapper: HTMLElement;
   private popup: HTMLElement;
   constructor(private options: PopupOptions) {
     this.wrapper = document.getElementById('popup-wrapper')!;
     this.popup = document.getElementById('popup')!;
   }
+  /**
+   * Initate the popup
+   * @returns {void}
+   */
   init() {
     // * Hide wrapper overlay
     this.wrapper.style.display = 'none';
@@ -40,14 +48,24 @@ export class Popup {
       e.stopPropagation();
     });
   }
+  /**
+   * Show the popup
+   * @returns {true}
+   */
   show() {
     this.wrapper.style.display = 'block';
     this.popup.setAttribute('tabindex', '0');
     return true;
   }
+  /**
+   * Hide the popup
+   * @returns {true}
+   */
   hide() {
     this.wrapper.style.display = 'none';
     this.popup.setAttribute('tabindex', '-1');
     return true;
   }
 }
+
+export { Popup };

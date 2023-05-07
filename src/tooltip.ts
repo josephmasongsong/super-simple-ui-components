@@ -2,7 +2,15 @@ import '../styles/tooltip.css';
 
 type Pos = 'right' | 'left' | 'top' | 'bottom';
 
-export class Tooltip {
+/**
+ * Tooltip
+ * @class
+ */
+class Tooltip {
+  /**
+   * @param {string} element
+   * @param {string} position
+   */
   private element: Element;
   private position: Pos;
   private message: string;
@@ -11,6 +19,10 @@ export class Tooltip {
     this.message = this.element.getAttribute('data-message')!;
     this.position = pos;
   }
+  /**
+   * Initiate the tooltip
+   * @returns {void}
+   */
   init() {
     const tip = document.createElement('div');
 
@@ -34,3 +46,5 @@ export class Tooltip {
     });
   }
 }
+
+export { Tooltip };
