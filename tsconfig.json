@@ -6,7 +6,8 @@
     "watch": true,
     "skipLibCheck": true,
     "outDir": "lib",
-    "lib": ["ES2015", "DOM"]
+    "lib": ["ES2015", "DOM"],
+    "sourceMap": true
   },
   "include": ["src"]
 }

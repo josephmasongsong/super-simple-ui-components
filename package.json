@@ -3,13 +3,21 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "build": "tsc"
+    "dev": "tsc",
+    "build": "rollup -c rollup.config.js"
   },
   "keywords": [],
   "author": "Joseph Masongsong <joseph@josephmasongsong.com> (https://www.josephmasongsong.com/)",
   "license": "ISC",
   "devDependencies": {
+    "@rollup/plugin-terser": "^0.4.1",
+    "@rollup/plugin-typescript": "^11.1.0",
+    "node-sass": "^8.0.0",
+    "rollup": "^3.21.5",
+    "rollup-plugin-scss": "^4.0.0",
+    "tslib": "^2.5.0",
     "typescript": "^5.0.4"
   }
 }
