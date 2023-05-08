@@ -1,26 +1,26 @@
+import '../styles/tab.css';
 /**
  * Tab
  * @class
  */
 class Tab {
-  private tabs: HTMLDivElement[];
-  private panels: HTMLDivElement[];
-  private tabContainer: HTMLDivElement | null;
-  private panelContainer: HTMLDivElement | null;
-  private selectedTab: HTMLDivElement | null;
-  constructor() {
-    this.tabContainer = document.querySelector('.tabs');
-    this.tabs = Array.from(this.tabContainer!.querySelectorAll('div'));
-    this.panelContainer = document.querySelector('.tabpanels');
-    this.panels = Array.from(this.panelContainer!.querySelectorAll('div'));
+  tabs: HTMLDivElement[];
+  panels: HTMLDivElement[];
+  selectedTab: HTMLDivElement | null;
+  container: HTMLDivElement;
+  constructor(public id: string) {
+    this.container = document.querySelector(id)!;
+    this.tabs = [...this.container.querySelector('.tabs')!.querySelectorAll('div')];
+    this.panels = [...this.container.querySelector('.panels')!.querySelectorAll('div')];
     this.selectedTab = null;
   }
   /**
-   * Initiate the tabs, add aria attributes and add event listeners
+   * Initiate the accordion
    * @returns {void}
    */
   init() {
-    // * Apply ARIA attributes to tabs
+    this.container.setAttribute('role', 'tablist');
+
     this.tabs.forEach((tab, index) => {
       tab.setAttribute('id', `tab-${index}`);
       tab.setAttribute('role', 'tab');
@@ -29,21 +29,18 @@ class Tab {
       tab.setAttribute('tabindex', index === 0 ? '0' : '-1');
     });
 
-    // * Set selected tab
     this.selectedTab = document.querySelector('[aria-selected=true]');
-    this.selectedTab!.focus();
+    if (this.selectedTab != null) this.selectedTab.focus();
 
-    // * Apply ARIA attributes to panels
     this.panels.forEach((panel, index) => {
       panel.setAttribute('id', `panel-${index}`);
       panel.setAttribute('role', 'tabpanel');
       panel.setAttribute('aria-labelledby', `tab-${index}`);
-      panel.setAttribute('aria-expanded', index === 0 ? 'true' : 'false');
+      panel.setAttribute('aria-hidden', index === 0 ? 'true' : 'false');
       panel.setAttribute('tabindex', index === 0 ? '0' : '-1');
       panel.style.display = index === 0 ? 'block' : 'none';
     });
 
-    // * Add click event to tabs
     this.tabs.forEach(tab => {
       tab.addEventListener('click', e => {
         if (e.target instanceof HTMLDivElement) {
@@ -53,7 +50,6 @@ class Tab {
       });
     });
 
-    // * Apply keydown event to tabs
     this.tabs.forEach(tab => {
       tab.addEventListener('keydown', e => {
         const currIndex = this.tabs.indexOf(this.selectedTab!);
@@ -73,8 +69,8 @@ class Tab {
     });
   }
   /**
-   * Set aria attributes for current tab and reset for others for click event
-   * @param {EventTarget}
+   * Reset ARIA attributes on inactive tabs and set ARIA on active tab
+   * @param {HTMLDivElement} el
    */
   toggleTabs(el: HTMLDivElement) {
     this.tabs.forEach(tab => {
@@ -85,25 +81,28 @@ class Tab {
     el.setAttribute('tabindex', '0');
   }
   /**
-   * Show active tab panel and hide the rest
-   * @param {EventTarget} el
+   * Reset ARIA attributes on inactive panels and set ARIA on active panels
+   * @param {HTMLDivElement} el
    */
   togglePanels(el: HTMLDivElement) {
     this.panels.forEach(panel => {
-      panel.setAttribute('aria-expanded', 'false');
+      panel.setAttribute('aria-hidden', 'false');
       panel.setAttribute('tabindex', '-1');
       panel.style.display = 'none';
     });
+
     const id = el.getAttribute('aria-controls');
     const panel = this.panels.find(panel => panel.id === id);
 
-    panel!.setAttribute('aria-expanded', 'true');
-    panel!.setAttribute('tabindex', '0');
-    panel!.style.display = 'block';
+    if (panel != null) {
+      panel.setAttribute('aria-hidden', 'true');
+      panel.setAttribute('tabindex', '0');
+      panel.style.display = 'block';
+    }
   }
   /**
-   * Set aria attribute for a single tab and unset the previously selected tab
-   * @param {HTMLElement} tab
+   * Reset ARIA for previously inactive tab and set for new tab
+   * @param {HTMLDivElement} tab
    */
   updateTab(tab: HTMLDivElement) {
     this.selectedTab!.setAttribute('aria-selected', 'true');

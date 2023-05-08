@@ -1,0 +1,18 @@
+.tabs div[role='tab'] {
+  list-style-type: none;
+  display: inline-block;
+  padding: 1rem 1.25rem;
+  cursor: pointer;
+  background-color: rgb(229, 231, 235);
+}
+.tabs div[role='tab'][aria-selected='true'] {
+  background-color: rgb(243, 244, 246);
+}
+.tabs div[role='tabpanel'] {
+  padding: 16px;
+  display: none;
+}
+.tabs div[role='tabpanel'][aria-hidden='false'] {
+  display: block;
+  background-color: rgb(243, 244, 246);
+}

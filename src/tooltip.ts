@@ -13,10 +13,10 @@ class Tooltip {
    */
   private element: Element;
   private position: Pos;
-  private message: string;
+  private message: string | null;
   constructor(element: string, pos: Pos = 'right') {
     this.element = document.querySelector(element)!;
-    this.message = this.element.getAttribute('data-message')!;
+    this.message = this.element.getAttribute('data-message');
     this.position = pos;
   }
   /**

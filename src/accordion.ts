@@ -1,68 +1,66 @@
+import '../styles/accordion.css';
 /**
  * Accordion
  * @class
  */
 class Accordion {
-  private tabs: HTMLButtonElement[];
-  private panels: HTMLDivElement[];
-  private selectedTab: HTMLButtonElement | null;
-  constructor() {
-    this.tabs = Array.from(document.querySelectorAll('.tab'));
-    this.panels = Array.from(document.querySelectorAll('.tabpanel'));
+  tabs: HTMLDivElement[];
+  panels: HTMLDivElement[];
+  selectedTab: HTMLDivElement | null;
+  container: HTMLDivElement;
+  constructor(public id: string) {
+    this.container = document.querySelector(id)!;
+    this.tabs = [...this.container.querySelectorAll<HTMLDivElement>('.tab')];
+    this.panels = [...this.container.querySelectorAll<HTMLDivElement>('.panel')];
     this.selectedTab = null;
   }
   /**
-   * Initiate the accordion tabs, add aria attributes and add event listeners
+   * Initiate the accordion
    * @returns {void}
    */
   init() {
-    // * Apply ARIA attributes to tabs
+    this.container.setAttribute('role', 'tablist');
+
     this.tabs.forEach((tab, index) => {
       tab.setAttribute('id', `tab-${index}`);
       tab.setAttribute('role', 'tab');
-      tab.setAttribute('tabindex', index === 0 ? '0' : '-1');
       tab.setAttribute('aria-controls', `panel-${index}`);
       tab.setAttribute('aria-selected', index === 0 ? 'true' : 'false');
+      tab.setAttribute('tabindex', index === 0 ? '0' : '-1');
     });
 
-    // * Set selected tab
     this.selectedTab = document.querySelector('[aria-selected=true]');
-    this.selectedTab!.focus();
+    if (this.selectedTab != null) this.selectedTab.focus();
 
-    // * Apply ARIA attributes to panels
     this.panels.forEach((panel, index) => {
       panel.setAttribute('id', `panel-${index}`);
       panel.setAttribute('role', 'tabpanel');
       panel.setAttribute('aria-labelledby', `tab-${index}`);
-      panel.setAttribute('aria-hidden', index === 0 ? 'false' : 'true');
+      panel.setAttribute('aria-expanded', index === 0 ? 'false' : 'true');
       panel.style.display = index === 0 ? 'block' : 'none';
     });
 
-    // * Add click event to tabs
     this.tabs.forEach(tab => {
       tab.addEventListener('click', e => {
-        if (e.target instanceof HTMLButtonElement) {
+        if (e.target instanceof HTMLDivElement) {
           this.toggleTabs(e.target);
           this.togglePanels(e.target);
         }
       });
     });
 
-    // * Apply keydown event to tabs
     this.tabs.forEach(tab => {
       tab.addEventListener('keydown', e => {
         const currIndex = this.tabs.indexOf(this.selectedTab!);
 
         if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-          e.preventDefault();
-
           const prevTab = this.tabs[currIndex - 1] || this.tabs[this.tabs.length - 1];
+
           this.updateTab(prevTab);
           this.togglePanels(prevTab);
         } else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
-          e.preventDefault();
-
           const nextTab = this.tabs[currIndex + 1] || this.tabs[0];
+
           this.updateTab(nextTab);
           this.togglePanels(nextTab);
         }
@@ -70,10 +68,10 @@ class Accordion {
     });
   }
   /**
-   * Set aria attributes for current tab and reset for others for click event
-   * @param {EventTarget}
+   * Reset ARIA attributes on inactive tabs and set ARIA on active tab
+   * @param {HTMLDivElement} el
    */
-  toggleTabs(el: HTMLButtonElement) {
+  toggleTabs(el: HTMLDivElement) {
     this.tabs.forEach(tab => {
       tab.setAttribute('aria-selected', 'false');
       tab.setAttribute('tabindex', '-1');
@@ -82,12 +80,12 @@ class Accordion {
     el.setAttribute('tabindex', '0');
   }
   /**
-   * Show active tab panel and hide the rest
-   * @param {EventTarget} el
+   * Reset ARIA attributes on inactive panels and set ARIA on active panels
+   * @param {HTMLDivElement} el
    */
-  togglePanels(el: HTMLButtonElement) {
+  togglePanels(el: HTMLDivElement) {
     this.panels.forEach(panel => {
-      panel.setAttribute('aria-hidden', 'true');
+      panel.setAttribute('aria-expanded', 'true');
       panel.setAttribute('tabindex', '-1');
       panel.style.display = 'none';
     });
@@ -95,15 +93,17 @@ class Accordion {
     const id = el.getAttribute('aria-controls');
     const panel = this.panels.find(panel => panel.id === id);
 
-    panel!.setAttribute('aria-hidden', 'false');
-    panel!.setAttribute('tabindex', '0');
-    panel!.style.display = 'block';
+    if (panel != null) {
+      panel.setAttribute('aria-expanded', 'false');
+      panel.setAttribute('tabindex', '0');
+      panel.style.display = 'block';
+    }
   }
   /**
-   * Set aria attribute for a single tab and unset the previously selected tab
-   * @param {HTMLElement} tab
+   * Reset ARIA for previously inactive tab and set for new tab
+   * @param {HTMLDivElement} tab
    */
-  updateTab(tab: HTMLButtonElement) {
+  updateTab(tab: HTMLDivElement) {
     this.selectedTab!.setAttribute('aria-selected', 'false');
     this.selectedTab!.setAttribute('tabindex', '-1');
     tab.setAttribute('aria-selected', 'true');

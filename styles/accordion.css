@@ -1,0 +1,34 @@
+.accordion [role='tab'] {
+  padding: 1rem;
+  position: relative;
+  cursor: pointer;
+  background-color: rgb(229, 231, 235);
+}
+
+.accordion [role='tab'][aria-selected='true'] {
+  background-color: rgb(243, 244, 246);
+}
+
+.accordion [role='tab']::after {
+  content: '>';
+  display: inline-block;
+  position: absolute;
+  right: 16px;
+  transform: rotate(90deg) scale(0.5, 1);
+  font-weight: bold;
+  transition: transform 0.3s;
+}
+
+.accordion [role='tab'][aria-selected='true']::after {
+  transform: rotate(-90deg) scale(0.5, 1);
+}
+
+.accordion [role='tabpanel'] {
+  display: none;
+  padding: 1rem;
+}
+
+.accordion [role='tabpanel'][aria-expanded='true'] {
+  display: block;
+  padding: 1rem;
+}

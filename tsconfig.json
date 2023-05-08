@@ -1,12 +1,12 @@
 {
   "compilerOptions": {
-    "target": "ES5",
+    "target": "ES2015",
     "module": "ESNext",
     "strict": true,
     "watch": true,
     "skipLibCheck": true,
     "outDir": "lib",
-    "lib": ["ES2015", "DOM"],
+    "lib": ["ES2015", "DOM", "DOM.Iterable"],
     "sourceMap": true
   },
   "include": ["src"]
