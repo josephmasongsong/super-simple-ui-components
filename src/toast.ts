@@ -13,15 +13,7 @@ type ToastOptions = {
   timeout: number;
 };
 
-/**
- * Toast
- * @class
- */
 class Toast {
-  /**
-   * @param {string} message
-   * @param {object} options
-   */
   private message: string;
   private options: ToastOptions;
   private toast: HTMLDivElement;
@@ -30,10 +22,7 @@ class Toast {
     this.options = options;
     this.toast = document.createElement('div');
   }
-  /**
-   * Initiate the toast
-   * @returns {void}
-   */
+  // * Initiate the toast
   init() {
     this.toast.setAttribute('role', 'alert');
     this.toast.setAttribute('aria-live', 'assertive');
@@ -52,10 +41,7 @@ class Toast {
     this.toast.classList.add('toast', style, ...positions);
     document.querySelector('body')!.appendChild(this.toast);
   }
-  /**
-   * Show the toast
-   * @returns {void}
-   */
+  // * Show the toast
   show() {
     const { timeout = 4000 } = this.options;
     this.toast.classList.add('active');

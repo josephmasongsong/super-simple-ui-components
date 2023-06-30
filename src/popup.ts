@@ -5,10 +5,6 @@ type PopupOptions = {
   opacity: string;
 };
 
-/**
- * Popup
- * @class
- */
 class Popup {
   private wrapper: HTMLElement;
   private popup: HTMLElement;
@@ -16,10 +12,7 @@ class Popup {
     this.wrapper = document.getElementById('popup-wrapper')!;
     this.popup = document.getElementById('popup')!;
   }
-  /**
-   * Initate the popup
-   * @returns {void}
-   */
+  // * Initate the popup
   init() {
     // * Hide wrapper overlay
     this.wrapper.style.display = 'none';
@@ -48,19 +41,13 @@ class Popup {
       e.stopPropagation();
     });
   }
-  /**
-   * Show the popup
-   * @returns {true}
-   */
+  // * Show the popup
   show() {
     this.wrapper.style.display = 'block';
     this.popup.setAttribute('tabindex', '0');
     return true;
   }
-  /**
-   * Hide the popup
-   * @returns {true}
-   */
+  // * Hide the popup
   hide() {
     this.wrapper.style.display = 'none';
     this.popup.setAttribute('tabindex', '-1');

@@ -1,8 +1,5 @@
 import '../styles/accordion.css';
-/**
- * Accordion
- * @class
- */
+
 class Accordion {
   tabs: HTMLDivElement[];
   panels: HTMLDivElement[];
@@ -14,10 +11,7 @@ class Accordion {
     this.panels = [...this.container.querySelectorAll<HTMLDivElement>('.panel')];
     this.selectedTab = null;
   }
-  /**
-   * Initiate the accordion
-   * @returns {void}
-   */
+  // * Initiate the accordion
   init() {
     this.container.setAttribute('role', 'tablist');
 
@@ -67,10 +61,7 @@ class Accordion {
       });
     });
   }
-  /**
-   * Reset ARIA attributes on inactive tabs and set ARIA on active tab
-   * @param {HTMLDivElement} el
-   */
+  // * Reset ARIA attributes on inactive tabs and set ARIA on active tab
   toggleTabs(el: HTMLDivElement) {
     this.tabs.forEach(tab => {
       tab.setAttribute('aria-selected', 'false');
@@ -79,10 +70,7 @@ class Accordion {
     el.setAttribute('aria-selected', 'true');
     el.setAttribute('tabindex', '0');
   }
-  /**
-   * Reset ARIA attributes on inactive panels and set ARIA on active panels
-   * @param {HTMLDivElement} el
-   */
+  // * Reset ARIA attributes on inactive panels and set ARIA on active panels
   togglePanels(el: HTMLDivElement) {
     this.panels.forEach(panel => {
       panel.setAttribute('aria-expanded', 'true');
@@ -99,10 +87,7 @@ class Accordion {
       panel.style.display = 'block';
     }
   }
-  /**
-   * Reset ARIA for previously inactive tab and set for new tab
-   * @param {HTMLDivElement} tab
-   */
+  // * Reset ARIA for previously inactive tab and set for new tab
   updateTab(tab: HTMLDivElement) {
     this.selectedTab!.setAttribute('aria-selected', 'false');
     this.selectedTab!.setAttribute('tabindex', '-1');
