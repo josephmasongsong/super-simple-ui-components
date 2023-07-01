@@ -2,7 +2,7 @@
 
 # Super Simple UI Components
 
-A ridiculously simple, tree shakeable, dependency free, vanilla javascript UI component package, that I built in my spare time as practice.
+A ridiculously simple, tree shakeable, dependency free, vanilla javascript UI component package. Components include: Accordion, Popup, Tabs, Toast, and Tooltip.
 
 ## Getting Started
 
@@ -17,7 +17,7 @@ npm install super-simple-ui-components
 In your Javascript file import the css and any components you will need from the package.
 
 ```js
-import 'super-simple-ui-components/dist/bundle.min.css';
+import 'super-simple-ui-components/lib/bundle.min.css';
 import { Accordion } from 'super-simple-ui-components';
 
 const accordion = new Accordion('#accordion');
@@ -30,12 +30,12 @@ To use the package in the browser via script tag, you can download the minified 
 
 ```html
 <!-- In your project <head> -->
-<link href="https://unpkg.com/super-simple-ui-components@2.0.0/dist/bundle.min.css" rel="stylesheet" />
-<script src="https://unpkg.com/super-simple-ui-components@2.0.0/dist/bundle.umd.min.js"></script>
+<link href="https://unpkg.com/super-simple-ui-components@2.0.0/lib/bundle.min.css" rel="stylesheet" />
+<script src="https://unpkg.com/super-simple-ui-components@2.0.0/lib/bundle.umd.min.js"></script>
 
 <!-- In your Javascript -->
 <script>
-  const { Accordion } = simpleUI;
+  const { Accordion } = sui;
   const accordion = new Accordion('#accordion');
   accordion.init();
 </script>
@@ -49,28 +49,16 @@ The library is minimally styled and limited in options. Below is the required HT
 
 #### Markup
 
-The wrapper id of 'accordion' is required to be passed to the instance. The trigger class also requires a data-target attribute that corresponds to the id of the content class div.
+A wrapper ID is required for the constructor. For every tab/panel combination you need a `tab` and `panel` class.
 
 ```html
 <div id="accordion">
-  <div>
-    <div data-target="#tab1" class="trigger">Tab 1</div>
-    <div id="tab1" class="content">
-      <!-- tab 1 content -->
-    </div>
-  </div>
-  <div>
-    <div data-target="#tab2" class="trigger">Tab 2</div>
-    <div id="tab2" class="content">
-      <!-- tab 2 content -->
-    </div>
-  </div>
-  <div>
-    <div data-target="#tab3" class="trigger">Tab 3</div>
-    <div id="tab3" class="content">
-      <!-- tab 3 content -->
-    </div>
-  </div>
+  <div class="tab">Tab 1</div>
+  <div class="panel">Tab 1 Content</div>
+  <div class="tab">Tab 2</div>
+  <div class="panel">Tab 2 Content</div>
+  <div class="tab">Tab 3</div>
+  <div class="panel">Tab 3 Content</div>
 </div>
 ```
 
@@ -85,19 +73,16 @@ See it in action on [Codesandbox](https://codesandbox.io/s/accordion-50pnef).
 
 #### Markup
 
-The ids and HTML markup are required as shown.
+The `popup-wrapper` and `popup` HTML markup and IDs are required. Popup is displayed and hidden with calls to `popup.show()` and `popup.hide()` in your code.
 
 ```html
 <div id="popup-wrapper">
   <div id="popup">
-    <div id="popup-close">x</div>
-    <div>
-      <!-- popup content -->
-    </div>
+    <button type="button" onclick="popup.hide()" id="popup-close">hide popup</button>
+    <div>popup content</div>
   </div>
 </div>
-
-<a href="#/" id="popup-open">Click me</a>
+<button type="button" onclick="popup.show()">show popup</button>
 ```
 
 #### Javascript
@@ -105,12 +90,12 @@ The ids and HTML markup are required as shown.
 The available options:
 
 ```js
-onst options = {
+const options = {
   maxWidth: '600px',
-  opacity: '0.85'
-}
+  opacity: '0.85',
+};
 
-const popup = new Popup('#popup-wrapper', options);
+const popup = new Popup((options = {})); // empty options object is required
 popup.init();
 ```
 
@@ -120,11 +105,13 @@ See it in action on [Codesandbox](https://codesandbox.io/s/popup-d51ou7).
 
 #### Markup
 
-The id `toast-trigger` is required.
+Toast is programatically displayed by calling `toast.show()` in your code.
+
+<button onclick="toast.show()">Show toast</button>
 
 #### Javascript
 
-Options for position include: top center, top left, top right, and bottom center, bottom left, bottom right. The available options for style are: alert, success, warn and info.
+Options for position include: `top center`, `top left`, `top right`, and `bottom center`, `bottom left`, `bottom right`. The available options for style are: `alert`, `success`, `warn` and `info`.
 
 ```js
 const message = 'Download Simple UI Kit as package on NPM!';
@@ -153,10 +140,10 @@ The `tooltip` class and `data-message` attribute are required.
 
 #### Javascript
 
-There is only one option for the tooltip and that is position. Values for position include: top, bottom, left and right.
+There is only one option for the tooltip and that is position. Values for position include: `top`, `bottom`, `left` and `right`.
 
 ```js
-const tooltip = new Tooltip('.tooltip', { position: 'right' });
+const tooltip = new Tooltip('.tooltip', 'right');
 tooltip.init();
 ```
 
@@ -166,23 +153,19 @@ See it action on [Codesandbox](https://codesandbox.io/s/tooltip-jnelp1)
 
 #### Markup
 
-The wrapper class 'tabs' is required to be passed to the instance. The trigger class also requires a data-target attribute that corresponds to the id of the content class div.
+A wrapper ID is required for the constructor. You must wrap your tabs and panels in a div with the classes `tabs` and `panels` respectively.
 
 ```html
-<div class="tabs">
-  <ul>
-    <li class="trigger active" data-target="#tab1">Tab 1</li>
-    <li class="trigger" data-target="#tab2">Tab 2</li>
-    <li class="trigger" data-target="#tab3">Tab 3</li>
-  </ul>
-  <div id="tab1" class="content active">
-    <!-- tab 1 content -->
+<div id="tabs">
+  <div class="tabs">
+    <div>Tab 1</div>
+    <div>Tab 3</div>
+    <div>Tab 2</div>
   </div>
-  <div id="tab2" class="content">
-    <!-- tab 2 content -->
-  </div>
-  <div id="tab3" class="content">
-    <!-- tab 3 content -->
+  <div class="panels">
+    <div>Tab 1 Content</div>
+    <div>Tab 2 Content</div>
+    <div>Tab 3 Content</div>
   </div>
 </div>
 ```
@@ -190,7 +173,7 @@ The wrapper class 'tabs' is required to be passed to the instance. The trigger c
 #### Javascript
 
 ```js
-const tabs = new Tabs('.tabs');
+const tabs = new Tabs('#tabs');
 tabs.init();
 ```
 
