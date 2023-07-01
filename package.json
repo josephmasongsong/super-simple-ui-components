@@ -1,16 +1,33 @@
 {
-  "name": "simple-ui",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "super-simple-ui-components",
+  "version": "2.0.0",
+  "description": "A ridiculously simple, tree shakeable, dependency free, vanilla javascript UI component package. Components include: Accordion, Popup, Tabs, Toast, and Tooltip.",
+  "main": "dist/bundle.esm.min.js",
+  "module": "dist/bundle.esm.min.js",
+  "browser": "dist/bundle.umd.min.js",
   "type": "module",
   "scripts": {
     "dev": "tsc",
     "build": "rollup -c rollup.config.js"
   },
-  "keywords": [],
+  "keywords": [
+    "Accordion",
+    "Popup",
+    "Tabs",
+    "Toast",
+    "Tooltip"
+  ],
   "author": "Joseph Masongsong <joseph@josephmasongsong.com> (https://www.josephmasongsong.com/)",
   "license": "ISC",
+  "files": [
+    "README.md",
+    "LICENSE",
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/josephmasongsong/super-simple-ui-components.git"
+  },
   "devDependencies": {
     "@rollup/plugin-terser": "^0.4.1",
     "@rollup/plugin-typescript": "^11.1.0",
