@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple UI Components Example</title>
+    <link href="/lib/bundle.min.css" rel="stylesheet" />
+    <script src="/lib/bundle.umd.min.js"></script>
+  </head>
+  <body>
+    <span class="tooltip" data-message="This is a tooltip!">What's a tooltip?</span>
+    <button onclick="toast.show()">Show toast</button>
+    <div id="accordion">
+      <div class="tab">Tab 1</div>
+      <div class="panel">Tab 1 Content</div>
+      <div class="tab">Tab 2</div>
+      <div class="panel">Tab 2 Content</div>
+      <div class="tab">Tab 3</div>
+      <div class="panel">Tab 3 Content</div>
+    </div>
+    <div id="tabs">
+      <div class="tabs">
+        <div>Tab 1</div>
+        <div>Tab 3</div>
+        <div>Tab 2</div>
+      </div>
+      <div class="panels">
+        <div>Tab 1 Content</div>
+        <div>Tab 2 Content</div>
+        <div>Tab 3 Content</div>
+      </div>
+
+      <div id="popup-wrapper">
+        <div id="popup">
+          <button type="button" onclick="popup.hide()" id="popup-close">hide popup</button>
+          <div>popup content</div>
+        </div>
+      </div>
+      <button type="button" onclick="popup.show()">show popup</button>
+    </div>
+    <script>
+      const { Accordion, Popup, Tab, Toast, Tooltip } = sui;
+      const tooltip = new Tooltip('.tooltip', 'right');
+      tooltip.init();
+
+      const toast = new Toast('Peekaboo!', { style: 'success', position: 'top right', timeout: 4000 });
+      toast.init();
+
+      const accordion = new Accordion('#accordion');
+      accordion.init();
+
+      const tabs = new Tab('#tabs');
+      tabs.init();
+
+      const popup = new Popup({});
+      popup.init();
+    </script>
+  </body>
+</html>
