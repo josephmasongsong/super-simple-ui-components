@@ -2,7 +2,7 @@
 
 # Super Simple UI Components
 
-A ridiculously simple, tree shakeable, dependency free, vanilla javascript UI component package. Components include: Accordion, Popup, Tabs, Toast, and Tooltip.
+A ridiculously simple, tree shakeable, dependency free, vanilla javascript UI component package, that is also ARIA compliant. Components include: Accordion, Popup, Tabs, Toast, and Tooltip.
 
 ## Getting Started
 
@@ -107,7 +107,9 @@ See it in action on [Codesandbox](https://codesandbox.io/s/popup-d51ou7).
 
 Toast is programatically displayed by calling `toast.show()` in your code.
 
+```html
 <button onclick="toast.show()">Show toast</button>
+```
 
 #### Javascript
 
