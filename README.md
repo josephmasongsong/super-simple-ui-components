@@ -30,8 +30,8 @@ To use the package in the browser via script tag, you can download the minified 
 
 ```html
 <!-- In your project <head> -->
-<link href="https://unpkg.com/super-simple-ui-components@2.0.0/lib/bundle.min.css" rel="stylesheet" />
-<script src="https://unpkg.com/super-simple-ui-components@2.0.0/lib/bundle.umd.min.js"></script>
+<link href="https://unpkg.com/super-simple-ui-components@2.0.1/lib/bundle.min.css" rel="stylesheet" />
+<script src="https://unpkg.com/super-simple-ui-components@2.0.1/lib/bundle.umd.min.js"></script>
 
 <!-- In your Javascript -->
 <script>
@@ -67,7 +67,7 @@ const accordion = new Accordion('#accordion');
 accordion.init();
 ```
 
-See it in action on [Codesandbox](https://codesandbox.io/s/accordion-50pnef).
+See it in action on [Codesandbox](https://codesandbox.io/s/accordion-p6xfdk).
 
 ### Popup
 
@@ -99,7 +99,7 @@ const popup = new Popup((options = {})); // empty options object is required
 popup.init();
 ```
 
-See it in action on [Codesandbox](https://codesandbox.io/s/popup-d51ou7).
+See it in action on [Codesandbox](https://codesandbox.io/s/popup-5j2547).
 
 ### Toast
 
@@ -128,7 +128,7 @@ const toast = new Toast(message, options);
 toast.init();
 ```
 
-See it in action on [Codesandbox](https://codesandbox.io/s/toast-2shzt1).
+See it in action on [Codesandbox](https://codesandbox.io/s/toast-8c4lmq).
 
 ### Tooltip
 
@@ -149,7 +149,7 @@ const tooltip = new Tooltip('.tooltip', 'right');
 tooltip.init();
 ```
 
-See it action on [Codesandbox](https://codesandbox.io/s/tooltip-jnelp1)
+See it action on [Codesandbox](https://codesandbox.io/s/tooltip-fypjwy)
 
 ### Tabs
 
@@ -179,4 +179,4 @@ const tabs = new Tabs('#tabs');
 tabs.init();
 ```
 
-See it in action on [Codesandbox](https://codesandbox.io/s/tabs-1kriku).
+See it in action on [Codesandbox](https://codesandbox.io/s/tabs-ytdnxd).

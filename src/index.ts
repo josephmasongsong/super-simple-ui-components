@@ -1,6 +1,6 @@
 import { Accordion } from './accordion';
 import { Popup } from './popup';
-import { Tab } from './tab';
+import { Tabs } from './tabs';
 import { Toast } from './toast';
 import { Tooltip } from './tooltip';
-export { Accordion, Popup, Tab, Toast, Tooltip };
+export { Accordion, Popup, Tabs, Toast, Tooltip };

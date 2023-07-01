@@ -1,6 +1,6 @@
-import '../styles/tab.css';
+import '../styles/tabs.css';
 
-class Tab {
+class Tabs {
   tabs: HTMLDivElement[];
   panels: HTMLDivElement[];
   selectedTab: HTMLDivElement | null;
@@ -99,4 +99,4 @@ class Tab {
   }
 }
 
-export { Tab };
+export { Tabs };

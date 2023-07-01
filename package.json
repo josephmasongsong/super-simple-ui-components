@@ -1,6 +1,6 @@
 {
   "name": "super-simple-ui-components",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A ridiculously simple, tree shakeable, dependency free, vanilla javascript UI component package. Components include: Accordion, Popup, Tabs, Toast, and Tooltip.",
   "main": "dist/bundle.esm.min.js",
   "module": "dist/bundle.esm.min.js",
